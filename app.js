@@ -44,9 +44,15 @@ app.use((req,res,next)=>{
 app.set('view engine','ejs')
 
 
-// This Is Where We Are MAking New Routes
-app.get('/',(req,res)=>{
-    res.render('index.ejs')
+// This Is Where We Are MAking New Routes and also method for specific route midleware
+app.get('/',(req,res,next)=>{
+    console.log("You Are In Middleware");
+    const a = 90+89;
+    console.log(a);
+    
+    next();
+},(req,res)=>{
+    res.render('index')
 })
 
 
