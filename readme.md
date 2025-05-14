@@ -7,3 +7,8 @@ npm i express
 
 <!-- For Render Html -->
 npm i ejs
+
+
+<!-- For MonogDb Connection -->
+
+npm i mongoose
