@@ -7,11 +7,11 @@ const userSchema = new mongoose.Schema({
     username: String,
     email:String,
     password:String,
-    // age:Number,
-    // gender:{
-    //     type:String,
-    //     enum: ['male','female']
-    // }
+    role: {
+    type: String,
+    enum: ['staff', 'manager'],  // make sure enum matches possible values
+    required: true
+  }
 })
 
 // for implemting in databse

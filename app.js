@@ -82,25 +82,54 @@ app.post('/register' , async(req,res)=>{
    console.log(req.body);
 
     // Destructur the Body 
-    const {username, email , password} = req.body
+    const {username, email , password , role} = req.body
 
     // for Creating User In database
-  await  userModel.create({
+ const newUser =  await  userModel.create({
         username:username,
         email:email,
         password:password,
+        role:role
     })
 
-   res.send("User Registerd")
+   res.send(newUser)
 })
 
+// Get All Users From DatadBAse For Read
 
-app.get('/about',(req,res)=>{
-    res.send("You Are On About Us Page")
+app.get('/get-users',(req,res)=>{
+    userModel.find().then((users)=>{
+        res.send(users)
+    })
 })
-app.get('/contact',(req,res)=>{
-    res.send("You Are On contact Us Page")
+// Get Only One User From DatadBAse For Read
+app.get('/one-user',(req,res)=>{
+    userModel.findOne({role:'manager'}).then((users)=>{
+        res.send(users)
+    })
 })
+// Get Only One User From DatadBAse and update
+app.get('/update-user',async (req,res)=>{
+   await userModel.findOneAndUpdate(
+        {
+            username:"rao"
+        },
+        {
+            email:'raoshahbaz@gmail.com'
+        }
+    )
+    res.send('User Updated')
+})
+// Get Only One User From DatadBAse and Delete 
+app.get('/delete-user',async (req,res)=>{
+   await userModel.findOneAndDelete(
+        {
+            username:"rao"
+        }
+    )
+    res.send('User Deleter SuccessFully')
+})
+
 
 
 // from fronted to get data on server sside USe Post Method its also not shoieng things in URl
